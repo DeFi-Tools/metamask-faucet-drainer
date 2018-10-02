@@ -15,17 +15,23 @@ const testnet = `https://ropsten.infura.io/${process.env.INFURA_ACCESS_TOKEN}`;
 const web3 = new Web3(new Web3.providers.HttpProvider(testnet));
 
 web3.eth.defaultAccount = WALLET_ADDRESS;
+const walletAccount = web3.eth.defaultAccount;
 
 async function runOnce() {
+  let balanceWei = await web3.eth.getBalance(walletAccount);
+  if (balanceWei >= 1e18) {
+    sendEth(balanceWei);
+    await delay(30 * 1000);  // 30 seconds
+  }
   drainer.drain(WALLET_ADDRESS, NUM_TRIALS);
   await delay(30 * 1000);  // 30 seconds
-  const balanceWei = await web3.eth.getBalance(web3.eth.defaultAccount);
+  balanceWei = await web3.eth.getBalance(walletAccount);
   console.log('Grabbed ' + (balanceWei / 1e18) + ' ETH');
   sendEth(balanceWei);
 }
 
 async function sendEth(amountWei) {
-  const nonce = await web3.eth.getTransactionCount(web3.eth.defaultAccount);
+  const nonce = await web3.eth.getTransactionCount(walletAccount);
   const gasPriceWei = await web3.eth.getGasPrice();
   const gasCost = GAS_LIMIT * gasPriceWei;
   const actualAmount = amountWei - gasCost;
