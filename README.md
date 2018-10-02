@@ -16,11 +16,21 @@ cd metamask-faucet-drainer
 npm i
 ```
 4. Start draining
-```
-Just drain:
-node -e "require('./drain').drainer(<PUT_YOUR_ADDRESS_HERE>)"
 
+Just drain:
+```
+node -e "require('./drain').drainer(<YOUR_ADDRESS>)"
+```
 Drain and send to a designated address:
+Create a ".env" file under the current directory, and put:
+```
+INFURA_ACCESS_TOKEN=<INFURA_ACCESS_TOKEN>
+WALLET_ADDRESS=<YOUR_ADDRESS>
+WALLET_PRIVATE_KEY=<YOUR_PRIVATE_KEY>
+DESTINATION_ADDRESS=<DESTINATION_ADDRESS>
+```
+then:
+```
 node run_drainer.js
 ```
 
