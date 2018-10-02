@@ -32,7 +32,6 @@ module.exports = {
         if (error) {
           throw new Error(error);
         }
-        console.log(body);
         logs.push(body);
       });
     }
