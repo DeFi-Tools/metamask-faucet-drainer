@@ -1,21 +1,21 @@
-const express = require('express')
-const app = express()
-var Drain = require("./drain")
-var ethereum_address = require('ethereum-address');
+const drainer = require('./drainer');
+const ethereumAddress = require('ethereum-address');
+const express = require('express');
+
+const app = express();
 
 app.get('/', (req, res) => {
-    res.send('To Earn Tokens: Change the URL to .../0x123456789your-address');
-})
+  res.send('To earn Ropsten ETH, change the URL to .../<your-address>');
+});
 
 app.get('/:address', async (req, res) => {
-    var address = req.params.address;
+  const address = req.params.address;
 
-    if (ethereum_address.isAddress(address)) {
-        res.send(await Drain.drainer(address));
-    }
-    else {
-        res.send('Invalid Ethereum address: ' + address)
-    }
-})
+  if (ethereumAddress.isAddress(address)) {
+    res.send(await drainer.drain(address));
+  } else {
+    res.send('Invalid Ethereum address: ' + address);
+  }
+});
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log('Faucet drainer listening on port 3000'));

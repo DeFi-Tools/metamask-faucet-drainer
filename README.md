@@ -1,4 +1,4 @@
-# faucet-drainer-v2
+# metamask-faucet-drainer
 
 ## How to use
 Make sure you have both [Node.js](https://nodejs.org) and npm installed.
@@ -8,8 +8,8 @@ node -v
 ```
 2. Get the repository
 ```
-git clone https://github.com/yhuag/faucet-drainer-v2.git
-cd faucet-drainer-v2
+git clone https://github.com/Dominator008/metamask-faucet-drainer.git
+cd metamask-faucet-drainer
 ```
 3. Install packages
 ```
@@ -17,7 +17,11 @@ npm i
 ```
 4. Start draining
 ```
-node drain.js <PUT_YOUR_ADDRESS_HERE>
+Just drain:
+node -e "require('./drain').drainer(<PUT_YOUR_ADDRESS_HERE>)"
+
+Drain and send to a designated address:
+node run_drainer.js
 ```
 
 ## Warning

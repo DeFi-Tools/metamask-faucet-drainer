@@ -4,9 +4,12 @@
   "description": "## How to use Make sure you have both [Node.js](https://nodejs.org) and npm installed. 1. Check your Node.js is ready ``` node -v ``` 2. Get the repository ``` git clone https://github.com/yhuag/faucet-drainer-v2.git cd faucet-drainer-v2 ``` 3. Install packages ``` npm i ``` 4. Start draining ``` node drain.js <PUT_YOUR_ADDRESS_HERE> ```",
   "main": "drain.js",
   "dependencies": {
+    "dotenv": "^6.0.0",
     "ethereum-address": "0.0.4",
+    "ethereumjs-tx": "^1.3.7",
     "express": "^4.16.3",
-    "request": "^2.85.0"
+    "request": "^2.88.0",
+    "web3": "^1.0.0-beta.36"
   },
   "devDependencies": {},
   "scripts": {
