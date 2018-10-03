@@ -55,5 +55,5 @@ async function sendEth(amount) {
 runOnce();
 setInterval(
     runOnce,
-    15 * 60 * 1000  // 15 minutes
+    16 * 60 * 1000  // 16 minutes
 );
