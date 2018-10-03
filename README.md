@@ -22,6 +22,7 @@ Just drain:
 node -e "require('./drain').drainer(<YOUR_ADDRESS>)"
 ```
 Drain and send to a designated address:
+
 Create a ".env" file under the current directory, and put:
 ```
 INFURA_ACCESS_TOKEN=<INFURA_ACCESS_TOKEN>
