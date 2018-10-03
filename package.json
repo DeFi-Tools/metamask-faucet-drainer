@@ -1,7 +1,7 @@
 {
   "name": "faucet-drainer-v2",
   "version": "1.0.0",
-  "description": "## How to use Make sure you have both [Node.js](https://nodejs.org) and npm installed. 1. Check your Node.js is ready ``` node -v ``` 2. Get the repository ``` git clone https://github.com/yhuag/faucet-drainer-v2.git cd faucet-drainer-v2 ``` 3. Install packages ``` npm i ``` 4. Start draining ``` node drain.js <PUT_YOUR_ADDRESS_HERE> ```",
+  "description": "A MetaMask faucet drainer",
   "main": "drain.js",
   "dependencies": {
     "dotenv": "^6.0.0",
