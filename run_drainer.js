@@ -29,10 +29,7 @@ async function runOnce() {
 
 async function sendEth(amount) {
   const nonce = await web3.eth.getTransactionCount(walletAccount);
-  let gasPrice = Number(await web3.eth.getGasPrice());
-  if (gasPrice <= 1e9) {
-    gasPrice += 1e9;
-  }
+  const gasPrice = Math.max(Number(await web3.eth.getGasPrice()), 2e9);
   const gasCost = GAS_LIMIT * gasPrice;
   const actualAmount = amount - gasCost;
   const details = {
